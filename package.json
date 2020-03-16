@@ -1,10 +1,17 @@
 {
-  "name": "electron-quick-start",
+  "name": "vibe",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "비공식 VIBE 앱입니다.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build:osx": "electron-builder --mac",
+    "build:linux": "npm run build:linux3  2 && npm run build:linux64",
+    "build:linux32": "build --linux --ia32",
+    "build:linux64": "build --linux --x64",
+    "build:win": "npm run build:win32 && npm run build:win64",
+    "build:win32": "build --win --ia32",
+    "build:win64": "build --win --x64"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -14,9 +21,57 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "이다용",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^8.0.0"
+    "electron": "^8.0.0",
+    "electron-builder": "^22.3.2"
+  },
+  "build": {
+    "productName": "VIBE",
+    "appId": "com.dayong.vibe",
+    "asar": true,
+    "protocols": {
+      "name": "VIBE",
+      "schemes": [
+        "VIBE"
+      ]
+    },
+    "mac": {
+      "target": [
+        "default"
+      ],
+      "icon": "./vibe_appicon.png"
+    },
+    "dmg": {
+      "title": "HelloElectron",
+      "icon": "./vibe_appicon.png"
+    },
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
+      "icon": "./vibe_appicon.png"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "zip",
+        "tar.gz"
+      ],
+      "icon": "./vibe_appicon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "buildResources": "resources/installer/",
+      "output": "dist/",
+      "app": "."
+    }
   }
 }
